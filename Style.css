@@ -44,6 +44,7 @@ h1 {
     box-shadow: 0.1 0.1 1.1rem rgba(0, 0, 0, 2);
     font-size: 8vmin;
     color: #FFAF87;
+    background-color: bisque;
 }
 
 .reset-btn button {
@@ -54,4 +55,30 @@ h1 {
     color: #fff;
     border-radius: 1.15rem;
     border: none;
+}
+
+#new-btn{
+padding: 1.1rem;
+    font-size: 1.29rem;
+    font-weight: 750;
+    background-color: black;
+    color: #fff;
+    border-radius: 1.15rem;
+    border: none;    
+}
+
+.msg-container{
+height: 30vmin;
+
+
+}
+.hide{
+    display: none;
+}
+
+
+#msg{
+color: blueviolet;
+font-size: 9vmin;
+
 }
