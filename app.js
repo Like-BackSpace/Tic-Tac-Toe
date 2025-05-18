@@ -15,52 +15,53 @@ const winPatterns = [
     [2, 4, 6],
     [3, 4, 5],
     [6, 7, 8],
-
 ];
 
 const resetGame = () => {
-turn0 = true;
-enableBoxes();
-msgContainer.classList.add("hide")
-    
+    turn0 = true;
+    enableBoxes();
+    msgContainer.classList.add("hide")
 }
 
 boxes.forEach((box) => {
     box.addEventListener("click", () => {
-        if (turn0) {
-            box.innerText = "0"
-            turn0 = false
+        if (box.innerText !== "") return;
 
+        if (turn0) {
+            box.innerText = "0";
+            box.classList.add("o-symbol");
+            box.classList.remove("x-symbol");
+            turn0 = false;
         } else {
             box.innerText = "X";
+            box.classList.add("x-symbol");
+            box.classList.remove("o-symbol");
             turn0 = true;
         }
-        box.disabled = true;
+        box.style.pointerEvents = "none";
 
         Winner();
-
-
     });
 });
 
-const disableBoxes = () =>{
-    for (let box of boxes){
-        box.disabled = true;
+const disableBoxes = () => {
+    for (let box of boxes) {
+        box.style.pointerEvents = "none";
     }
 }
 
-const enableBoxes = () =>{
-    for (let box of boxes){
-        box.disabled = false;
-        box.innerText = ""
+const enableBoxes = () => {
+    for (let box of boxes) {
+        box.style.pointerEvents = "auto";
+        box.innerText = "";
+        box.classList.remove("x-symbol", "o-symbol");
     }
 }
-
 
 const showWinner = (winner) => {
-    msg.innerText = `Coungratulations, Winner is ${winner}`;
+    msg.innerText = `Congratulations, Winner is ${winner}`;
     msgContainer.classList.remove("hide");
-    disableBoxes ();
+    disableBoxes();
 }
 
 const Winner = () => {
@@ -69,13 +70,11 @@ const Winner = () => {
         let pos2Val = boxes[pattern[1]].innerText;
         let pos3Val = boxes[pattern[2]].innerText;
 
-        if (pos1Val != "" && pos2Val != "" && pos3Val != "") {
+        if (pos1Val !== "" && pos2Val !== "" && pos3Val !== "") {
             if (pos1Val === pos2Val && pos2Val === pos3Val) {
-
                 showWinner(pos1Val);
             }
         }
-
     }
 };
 

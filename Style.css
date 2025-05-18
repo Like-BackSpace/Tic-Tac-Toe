@@ -85,3 +85,14 @@ color: black;
 font-size: 6vmin;
 
 }
+
+
+.o-symbol {
+    color: green;
+    font-weight: bold;
+}
+
+.x-symbol {
+    color: red;
+    font-weight: bold;
+}
