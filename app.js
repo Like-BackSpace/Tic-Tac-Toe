@@ -1,8 +1,12 @@
+let clickSound = new Audio("click.mp3");
+let winSound = new Audio("winning.mp3");
+
 let boxes = document.querySelectorAll(".box");
 let resetBtn = document.querySelector("#reset-btn");
 let newGameBtn = document.querySelector("#new-btn");
 let msgContainer = document.querySelector(".msg-container")
 let msg = document.querySelector("#msg")
+let turnText = document.querySelector("#turn-indicator");
 
 let turn0 = true;
 
@@ -20,23 +24,30 @@ const winPatterns = [
 const resetGame = () => {
     turn0 = true;
     enableBoxes();
-    msgContainer.classList.add("hide")
+    msgContainer.classList.add("hide");
+    turnText.innerText = "Player 0's Turn";
 }
 
 boxes.forEach((box) => {
     box.addEventListener("click", () => {
         if (box.innerText !== "") return;
+        clickSound.currentTime = 0;  
+        clickSound.play();           
+
 
         if (turn0) {
             box.innerText = "0";
             box.classList.add("o-symbol");
             box.classList.remove("x-symbol");
             turn0 = false;
+            turnText.innerText = "Player X's Turn";
         } else {
             box.innerText = "X";
             box.classList.add("x-symbol");
             box.classList.remove("o-symbol");
             turn0 = true;
+            turnText.innerText = "Player 0's Turn";
+
         }
         box.style.pointerEvents = "none";
 
@@ -59,9 +70,13 @@ const enableBoxes = () => {
 }
 
 const showWinner = (winner) => {
+    winSound.currentTime = 0;
+    winSound.play();
+
     msg.innerText = `Congratulations, Winner is ${winner}`;
     msgContainer.classList.remove("hide");
     disableBoxes();
+    turnText.innerText = "";
 }
 
 const Winner = () => {
@@ -76,12 +91,11 @@ const Winner = () => {
             if (pos1Val === pos2Val && pos2Val === pos3Val) {
                 showWinner(pos1Val);
                 winnerFound = true;
-                return; // Exit early if winner is found
+                return; 
             }
         }
     }
 
-    // Check if it's a draw (no empty boxes left)
     let isDraw = true;
     boxes.forEach((box) => {
         if (box.innerText === "") {
@@ -95,7 +109,6 @@ const Winner = () => {
         disableBoxes();
     }
 };
-
 
 newGameBtn.addEventListener("click", resetGame)
 resetBtn.addEventListener("click", resetGame)
