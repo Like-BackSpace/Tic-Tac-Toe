@@ -68,17 +68,20 @@ padding: 1.1rem;
 }
 
 .msg-container{
-height: 30vmin;
-
-
+height: 100vmin;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+gap: 3rem;
 }
-.hide{
-    display: none;
-}
+ .hide{
+    display: none; 
+} 
 
 
 #msg{
-color: blueviolet;
-font-size: 9vmin;
+color: black;
+font-size: 6vmin;
 
 }
